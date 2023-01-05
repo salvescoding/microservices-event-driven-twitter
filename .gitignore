@@ -32,6 +32,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+twitter-to-kafka-service/src/main/resources/twitter4j.properties
+docker-compose/.env
+
 
 ### VS Code ###
 .vscode/
