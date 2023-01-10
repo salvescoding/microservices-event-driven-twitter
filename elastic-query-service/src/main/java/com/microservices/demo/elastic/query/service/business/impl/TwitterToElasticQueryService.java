@@ -1,0 +1,45 @@
+package com.microservices.demo.elastic.query.service.business.impl;
+
+import com.microservices.demo.elastic.model.index.impl.TwitterIndexModel;
+import com.microservices.demo.elastic.query.client.service.ElasticQueryClient;
+import com.microservices.demo.elastic.query.service.api.ElasticDocumentController;
+import com.microservices.demo.elastic.query.service.business.ElasticQueryService;
+import com.microservices.demo.elastic.query.service.model.ElasticQueryServiceResponseModel;
+import com.microservices.demo.elastic.query.service.transformer.ElasticToQueryTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class TwitterToElasticQueryService implements ElasticQueryService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(TwitterToElasticQueryService.class);
+    private final ElasticQueryClient<TwitterIndexModel> elasticQueryClient;
+
+    private final ElasticToQueryTransformer transformer;
+
+    public TwitterToElasticQueryService(ElasticQueryClient<TwitterIndexModel> elasticQueryClient, ElasticToQueryTransformer transformer) {
+        this.elasticQueryClient = elasticQueryClient;
+        this.transformer = transformer;
+    }
+
+    @Override
+    public ElasticQueryServiceResponseModel getDocumentsById(String id) {
+        LOG.info("Querying for document with id: {}", id);
+        return transformer.getResponseModel(elasticQueryClient.getIndexModelById(id));
+    }
+
+    @Override
+    public List<ElasticQueryServiceResponseModel> getAllDocuments() {
+        LOG.info("Querying for all documents");
+        return transformer.getResponseModels(elasticQueryClient.getAllIndexModels());
+    }
+
+    @Override
+    public List<ElasticQueryServiceResponseModel> getDocumentsByText(String text) {
+        LOG.info("Querying for documents with text: {}", text);
+        return transformer.getResponseModels(elasticQueryClient.getIndexModelByText(text));
+    }
+}
