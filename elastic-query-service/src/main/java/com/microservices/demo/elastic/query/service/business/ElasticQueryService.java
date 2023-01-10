@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ElasticQueryService {
 
-    ElasticQueryServiceResponseModel getDocumentsById(String id);
+    ElasticQueryServiceResponseModel getDocumentById(String id);
 
     List<ElasticQueryServiceResponseModel> getAllDocuments();
 
