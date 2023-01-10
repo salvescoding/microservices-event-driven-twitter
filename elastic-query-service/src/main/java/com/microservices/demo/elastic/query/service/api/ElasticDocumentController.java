@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +35,14 @@ public class ElasticDocumentController {
     @GetMapping("/{id}")
     public @ResponseBody
     ResponseEntity<ElasticQueryServiceResponseModel>
-    getDocumentById(@PathVariable String id) {
+    getDocumentById(@PathVariable @NotEmpty String id) {
         return ResponseEntity.ok(elasticQueryService.getDocumentsById(id));
     }
 
     @PostMapping("/get-document-by-text")
     public @ResponseBody
     ResponseEntity<List<ElasticQueryServiceResponseModel>>
-    getDocumentByText(@RequestBody ElasticQueryServiceRequestModel elasticQueryServiceRequestModel) {
+    getDocumentByText(@RequestBody @Valid ElasticQueryServiceRequestModel elasticQueryServiceRequestModel) {
         List<ElasticQueryServiceResponseModel> documentsByText = elasticQueryService.getDocumentsByText(elasticQueryServiceRequestModel.getText());
         LOG.info("Elasticsearch returned {} of documents", documentsByText.size());
         return ResponseEntity.ok(documentsByText);
