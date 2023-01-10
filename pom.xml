@@ -44,6 +44,7 @@
 		<elastic.version>7.9.1</elastic.version>
 		<httpclient.version>4.5.13</httpclient.version>
 		<json.version>20210307</json.version>
+		<spring-doc-open-api.version>1.6.14</spring-doc-open-api.version>
 	</properties>
 
 	<repositories>
@@ -178,6 +179,13 @@
 				<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 				<version>${spring-boot.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-ui</artifactId>
+				<version>${spring-doc-open-api.version}</version>
+			</dependency>
+
 
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
