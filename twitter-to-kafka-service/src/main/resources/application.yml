@@ -4,9 +4,13 @@ server:
 twitter-to-kafka-service:
   twitter-keywords:
     - Java
-    - Microservices
     - Kafka
     - Elasticsearch
+    - ChatGPT
+    - elonmusk
+    - Redis
+    - Kotlin
+    - Scala
   welcome-message: Hello microservices!
   enable-v2-tweets: true
   enable-mock-tweets: false
